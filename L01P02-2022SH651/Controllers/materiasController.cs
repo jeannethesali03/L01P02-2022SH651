@@ -9,22 +9,22 @@ using L01P02_2022SH651.Models;
 
 namespace L01P02_2022SH651.Controllers
 {
-    public class AlumnoController : Controller
+    public class materiasController : Controller
     {
         private readonly notasDbContext _context;
 
-        public AlumnoController(notasDbContext context)
+        public materiasController(notasDbContext context)
         {
             _context = context;
         }
 
-        // GET: Alumno
+        // GET: materias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Alumno.ToListAsync());
+            return View(await _context.materias.ToListAsync());
         }
 
-        // GET: Alumno/Details/5
+        // GET: materias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace L01P02_2022SH651.Controllers
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.id_alumno == id);
-            if (alumno == null)
+            var materias = await _context.materias
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (materias == null)
             {
                 return NotFound();
             }
 
-            return View(alumno);
+            return View(materias);
         }
 
-        // GET: Alumno/Create
+        // GET: materias/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Alumno/Create
+        // POST: materias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id_alumno,codigo,nombre,apellidos,dui,estado")] Alumno alumno)
+        public async Task<IActionResult> Create([Bind("id,materia,unidades_valorativas,estado")] materias materias)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(alumno);
+                _context.Add(materias);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(alumno);
+            return View(materias);
         }
 
-        // GET: Alumno/Edit/5
+        // GET: materias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace L01P02_2022SH651.Controllers
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno.FindAsync(id);
-            if (alumno == null)
+            var materias = await _context.materias.FindAsync(id);
+            if (materias == null)
             {
                 return NotFound();
             }
-            return View(alumno);
+            return View(materias);
         }
 
-        // POST: Alumno/Edit/5
+        // POST: materias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id_alumno,codigo,nombre,apellidos,dui,estado")] Alumno alumno)
+        public async Task<IActionResult> Edit(int id, [Bind("id,materia,unidades_valorativas,estado")] materias materias)
         {
-            if (id != alumno.id_alumno)
+            if (id != materias.id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace L01P02_2022SH651.Controllers
             {
                 try
                 {
-                    _context.Update(alumno);
+                    _context.Update(materias);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlumnoExists(alumno.id_alumno))
+                    if (!materiasExists(materias.id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace L01P02_2022SH651.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(alumno);
+            return View(materias);
         }
 
-        // GET: Alumno/Delete/5
+        // GET: materias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +123,34 @@ namespace L01P02_2022SH651.Controllers
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.id_alumno == id);
-            if (alumno == null)
+            var materias = await _context.materias
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (materias == null)
             {
                 return NotFound();
             }
 
-            return View(alumno);
+            return View(materias);
         }
 
-        // POST: Alumno/Delete/5
+        // POST: materias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var alumno = await _context.Alumno.FindAsync(id);
-            if (alumno != null)
+            var materias = await _context.materias.FindAsync(id);
+            if (materias != null)
             {
-                _context.Alumno.Remove(alumno);
+                _context.materias.Remove(materias);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlumnoExists(int id)
+        private bool materiasExists(int id)
         {
-            return _context.Alumno.Any(e => e.id_alumno == id);
+            return _context.materias.Any(e => e.id == id);
         }
     }
 }

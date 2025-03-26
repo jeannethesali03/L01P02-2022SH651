@@ -10,10 +10,8 @@ namespace L01P02_2022SH651.Models
         {
         }
 
-        public DbSet<Facultad> Facultad { get; set; }
-        public DbSet<Materia> Materia { get; set; }
-        public DbSet<Departamento> Departamento { get; set; }
-        public DbSet<L01P02_2022SH651.Models.Alumno> Alumno { get; set; } = default!;
-
+        public DbSet<facultades> facultades { get; set; }
+        public DbSet<materias> materias { get; set; }
+        
     }
 }

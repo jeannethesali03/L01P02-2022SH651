@@ -1,4 +1,4 @@
-﻿@model IEnumerable<L01P02_2022SH651.Models.Facultad>
+﻿@model IEnumerable<L01P02_2022SH651.Models.facultades>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.facultad)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_facultad">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_facultad">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_facultad">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }
